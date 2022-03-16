@@ -37,7 +37,7 @@ public final class RangesAndReadings {
   public static List<RangesAndReadings> checkForRanges(final int[] values) {
     System.out.println("Range, Readings");
     if (values.length == 0) {
-      return List.of();
+      return null;
     }
 
     List<Integer> sortedInt = IntStream.of(values).boxed().collect(Collectors.toList());

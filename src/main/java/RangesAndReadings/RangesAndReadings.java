@@ -10,6 +10,8 @@ public final class RangesAndReadings {
 
   private final int start;
   private int end;
+  private static final int MAXINPUT = 4094;
+  private static final int MININPUT = 0;
 
   public RangesAndReadings(final int value) {
     this.start = value;
@@ -81,6 +83,30 @@ public final class RangesAndReadings {
     ranges.forEach(a -> {
       System.out.println(a + ", " + a.lenOfRange(a.start, a.end));
     });
+  }
+  
+  public static List<RangesAndReadings> findRangesForA2D(final int[] a2dInput) {
+    int[] ampsValues = convertA2DValuesIntoAmps(a2dInput);
+    return checkForRanges(ampsValues);
+  }
+
+  public static int[] convertA2DValuesIntoAmps(final int[] a2dInput) {
+    int[] ampsList = new int[a2dInput.length];
+    int iterator = 0;
+    for (int a2dValue : a2dInput) {
+      iterator = ampsConversion(ampsList, iterator, a2dValue);
+    }
+    return ampsList;
+  }
+
+  private static int ampsConversion(final int[] ampsList, int iterator, final int a2dValue) {
+    int a2dValueInAmps;
+    if ((a2dValue >= MININPUT) && (a2dValue <= MAXINPUT)) {
+      a2dValueInAmps = Math.round((float) (a2dValue * 10) / 4094);
+      ampsList[iterator] = a2dValueInAmps;
+      iterator++;
+    }
+    return iterator;
   }
 
 }
